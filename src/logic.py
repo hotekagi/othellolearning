@@ -14,7 +14,24 @@ class Board:
         stones[lu + 1][lu + 1] = Stone.LIGHT
         stones[lu][lu + 1] = Stone.DARK
         stones[lu + 1][lu] = Stone.DARK
+
         self.stones = stones
+        self.turn = Stone.DARK
+
+    def refresh(self, size=8):
+        self.__init__(size=size)
+
+    def change_turn(self):
+        if self.turn == Stone.DARK:
+            self.turn = Stone.LIGHT
+        else:
+            self.turn = Stone.DARK
+
+    def put_stone(self, idx0, idx1):
+        self.stones[idx0][idx1] = self.turn
+
+    def is_empty(self, idx0, idx1):
+        return self.stones[idx0][idx1] == Stone.EMPTY
 
 if __name__ == '__main__':
     test = Board()

@@ -30,23 +30,45 @@
     height: 30px;
     border-radius: 50%;
     }
+
+    div.empty {
+    width: 30px;
+    height: 30px;
+    }
   </style>
+  <script type="text/javascript">
+    function putStone(obj0, obj1){
+      document.board.position0.value = obj0;
+      document.board.position1.value = obj1;
+      document.board.submit();
+    }
+  </script>
 </head>
 <body>
-  <table id='board'>
-    {% for row in board_data %}
-      <tr>
-        {% for stone in row %}
-          {% if stone.value == 'o' %}
-            <td><div class='white'></div></td>
-          {% elif stone.value == 'x' %}
-            <td><div class='black'></div></td>
-          {% else %}
-            <td><div></div></td>
-          {% endif %}
-        {% endfor %}
-      </tr>
-    {% endfor %}
-  </table>
+  {% if turn.value == 'o' %}
+    <p> White's Turn</p>
+  {% elif turn.value == 'x' %}
+    <p> Black's Turn</p>
+  {% endif %}
+  <form name="board" method="post" action="/post">
+    <input type="hidden" name="position0" value="" />
+    <input type="hidden" name="position1" value="" />
+    <table id='board'>
+      {% for row in board_data %}
+        {% set outer_loop = loop %}
+        <tr>
+          {% for stone in row %}
+            {% if stone.value == 'o' %}
+              <td><div class='white' onclick="putStone(`{{ outer_loop.index0 }}`, `{{ loop.index0 }}`)"></div></td>
+            {% elif stone.value == 'x' %}
+              <td><div class='black' onclick="putStone(`{{ outer_loop.index0 }}`, `{{ loop.index0 }}`)"></div></td>
+            {% else %}
+              <td><div class='empty' onclick="putStone(`{{ outer_loop.index0 }}`, `{{ loop.index0 }}`)"></div></td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </form>
 </body>
 </html>
