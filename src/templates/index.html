@@ -34,86 +34,19 @@
 </head>
 <body>
   <table id='board'>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div class='white'></div></td>
-      <td><div class='black'></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div class='black'></div></td>
-      <td><div class='white'></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
-    <tr>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-      <td><div></div></td>
-    </tr>
+    {% for row in board_data %}
+      <tr>
+        {% for stone in row %}
+          {% if stone.value == 'o' %}
+            <td><div class='white'></div></td>
+          {% elif stone.value == 'x' %}
+            <td><div class='black'></div></td>
+          {% else %}
+            <td><div></div></td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    {% endfor %}
   </table>
 </body>
 </html>
